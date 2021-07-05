@@ -1,0 +1,21 @@
+DROP PROCEDURE IF EXISTS penilaian;
+
+
+DELIMITER //
+CREATE PROCEDURE penilaian(nim_mhs CHAR(8))
+BEGIN
+SET hasil = SELECT semester_1 FROM nilai_mahasiswa where nim = nim_mhs;
+        CASE
+        WHEN (hasil <= 1.00) THEN
+                SELECT 'Serius kuliah g sih?';
+        WHEN (hasil <= 2.00) THEN
+                SELECT 'Kebanyakan main';
+        WHEN (hasil <= 3.00) THEN
+                SELECT 'Berusaha lagi';
+        WHEN (hasil <= 4.00) THEN
+                SELECT 'Mantap, pertahankan!';
+        ELSE
+                SELECT 'Nilai tidak sesuai';
+END CASE;
+END//
+DELIMITER ;
